@@ -1,227 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SheHugs - Username Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap" rel="stylesheet" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SheHugs - Username Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap" rel="stylesheet" />
+<style>
+body {
+  margin: 0;
+  font-family: 'Foglighten', serif;
+  background: url('images/flowers.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #4B2C2C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Foglighten', serif;
-      background: url('images/flowers.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #4B2C2C;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+.container {
+  max-width: 650px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(75, 44, 44, 0.25);
+}
 
-    .container {
-      position: relative;
-      max-width: 650px;
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      box-shadow: 0 12px 30px rgba(75, 44, 44, 0.25);
-    }
-
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      font-weight: 600;
-      color: #b57a84;
-    }
-
-    select, button {
-      padding: 12px 20px;
-      font-size: 1em;
-      border-radius: 12px;
-      border: none;
-      margin: 10px 0;
-      font-family: 'Foglighten', serif;
-      cursor: pointer;
-    }
-
-    button {
-      background: linear-gradient(135deg, #b57a84, #d8a39d);
-      color: white;
-      box-shadow: 0 4px 10px rgba(181, 122, 132, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 14px rgba(181, 122, 132, 0.6);
-    }
-
-    .step {
-      margin-top: 20px;
-    }
-
-    .usernames, .emojis {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .option {
-      background: rgba(255,255,255,0.7);
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .option:hover {
-      transform: scale(1.05);
-      background: rgba(255,255,255,0.9);
-    }
-
-    .hidden { display: none; }
-  </style>
+h1 { font-size: 2.5em; margin-bottom: 20px; color: #b57a84; }
+.step { margin-top: 20px; }
+.hidden { display: none; }
+select, button { padding: 12px 20px; margin: 10px 0; font-family: 'Foglighten', serif; border-radius: 12px; border: none; font-size: 1em; cursor: pointer; }
+button { background: linear-gradient(135deg, #b57a84, #d8a39d); color: white; box-shadow: 0 4px 10px rgba(181,122,132,0.4); transition: all 0.3s ease; }
+button:hover { transform: scale(1.05); box-shadow: 0 6px 14px rgba(181,122,132,0.6); }
+.usernames, .emojis { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+.option { background: rgba(255,255,255,0.7); padding: 10px 15px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; }
+.option:hover { transform: scale(1.05); background: rgba(255,255,255,0.9); }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Generate Your Anonymous Name 🫶</h1>
+<div class="container">
+<h1>Generate Your Anonymous Name 🫶</h1>
 
-    <!-- Step 1: Base Name -->
-    <div id="step1" class="step">
-      <label>Choose a base name:</label><br>
-      <select id="baseName">
-        <option value="Anonymous">Anonymous</option>
-        <option value="Incognito">Incognito</option>
-        <option value="Unknown">Unknown</option>
-      </select><br>
-      <button onclick="goToStep2()">Next</button>
-    </div>
+<!-- Step 1: Base Name -->
+<div id="step1" class="step">
+  <label>Choose a base name:</label><br>
+  <select id="baseName">
+    <option value="Anonymous">Anonymous</option>
+    <option value="Incognito">Incognito</option>
+    <option value="Unknown">Unknown</option>
+  </select><br>
+  <button onclick="goToStep2()">Next</button>
+</div>
 
-    <!-- Step 2: Select Name -->
-    <div id="step2" class="step hidden">
-      <h3>Select a name</h3>
-      <div class="usernames" id="usernames"></div>
-    </div>
+<!-- Step 2: Select Name -->
+<div id="step2" class="step hidden">
+  <h3>Select a name</h3>
+  <div class="usernames" id="usernames"></div>
+</div>
 
-    <!-- Step 3: Select Emoji -->
-    <div id="step3" class="step hidden">
-      <h3>Select an emoji for your name</h3>
-      <div class="emojis" id="emojiOptions"></div>
-    </div>
+<!-- Step 3: Select Emoji -->
+<div id="step3" class="step hidden">
+  <h3>Select an emoji for your name</h3>
+  <div class="emojis" id="emojiOptions"></div>
+</div>
 
-    <!-- Step 4: Final -->
-    <div id="step4" class="step hidden">
-      <h3>Your Final Username</h3>
-      <p id="finalUsername"></p>
-      <button onclick="goToLogin()">Continue to Login</button>
-    </div>
-  </div>
+<!-- Step 4: Final -->
+<div id="step4" class="step hidden">
+  <h3>Your Final Username</h3>
+  <p id="finalUsername"></p>
+  <button onclick="goToLogin()">Continue to Login</button>
+</div>
+</div>
 
-  <script>
-    const adjectives = {
-      pretty: ['Lovely', 'Beautiful', 'Sweet', 'Charming', 'Radiant'],
-      strong: ['Brave', 'Bold', 'Fearless', 'Mighty', 'Heroic'],
-      gentle: ['Soft', 'Tender', 'Calm', 'Kind', 'Graceful'],
-      creative: ['Artful', 'Imaginative', 'Dreamy', 'Inspired', 'Visionary'],
-      funny: ['Cheery', 'Jolly', 'Witty', 'Happy', 'Sunny']
+<script>
+const adjectives = {pretty:['Lovely','Beautiful','Sweet','Charming','Radiant'],strong:['Brave','Bold','Fearless','Mighty','Heroic'],gentle:['Soft','Tender','Calm','Kind','Graceful'],creative:['Artful','Imaginative','Dreamy','Inspired','Visionary'],funny:['Cheery','Jolly','Witty','Happy','Sunny']};
+const hobbies = {music:['Melody','Harmony','Rhythm','Lyric','Chord'],reading:['Bookworm','Page','Novel','Story','Verse'],sports:['Runner','Goal','Champion','Ace','Player'],art:['Painter','Sketch','Canvas','Color','Brush'],travel:['Wanderer','Explorer','Journey','Path','Nomad']};
+const styles = {gothic:['Shadow','Raven','Mystic','Night','Obsidian'],pastel:['Blush','Cloud','Cotton','Dream','Petal'],boho:['Gypsy','Sunbeam','Feather','Wander','Meadow'],sporty:['Sprint','Dash','Kick','Flex','Score'],elegant:['Silk','Velvet','Pearl','Grace','Lace']};
+const emojis = ['🌸','🫶','😇','🎵','📚','⚽','🎨','✈️','🖤','🌷','🌻','🏅','💎'];
+
+let selectedBase='', selectedName='', selectedEmoji='';
+let usedEmojis = new Set();
+
+function getRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function generateCategoryNames(categoryObj,count=2){
+  let names = [];
+  const keys = Object.keys(categoryObj);
+  while(names.length < count*keys.length){
+    const cat = getRandom(keys);
+    const name = getRandom(categoryObj[cat]);
+    if(!names.includes(name)) names.push(name);
+  }
+  return names.slice(0,6);
+}
+
+function goToStep2(){
+  selectedBase = document.getElementById('baseName').value;
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+
+  const usernamesDiv = document.getElementById('usernames');
+  usernamesDiv.innerHTML = '';
+  const names = generateCategoryNames({...adjectives,...hobbies,...styles});
+
+  names.forEach(name=>{
+    const div = document.createElement('div');
+    div.textContent = name;
+    div.className='option';
+    div.onclick=()=>{
+      selectedName=name;
+      goToStep3();
     };
+    usernamesDiv.appendChild(div);
+  });
+}
 
-    const hobbies = {
-      music: ['Melody', 'Harmony', 'Rhythm', 'Lyric', 'Chord'],
-      reading: ['Bookworm', 'Page', 'Novel', 'Story', 'Verse'],
-      sports: ['Runner', 'Goal', 'Champion', 'Ace', 'Player'],
-      art: ['Painter', 'Sketch', 'Canvas', 'Color', 'Brush'],
-      travel: ['Wanderer', 'Explorer', 'Journey', 'Path', 'Nomad']
+function goToStep3(){
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.remove('hidden');
+
+  const emojiDiv = document.getElementById('emojiOptions');
+  emojiDiv.innerHTML = '';
+  emojis.forEach(emoji=>{
+    if(!usedEmojis.has(emoji)){
+      const div=document.createElement('div');
+      div.textContent=emoji;
+      div.className='option';
+      div.onclick=()=>{
+        selectedEmoji=emoji;
+        usedEmojis.add(emoji);
+        showFinalUsername();
+      };
+      emojiDiv.appendChild(div);
+    }
+  });
+}
+
+function showFinalUsername(){
+  document.getElementById('step3').classList.add('hidden');
+  document.getElementById('step4').classList.remove('hidden');
+
+  const final = `${selectedBase} ${selectedName} ${selectedEmoji}`;
+  localStorage.setItem('selectedUsername',final);
+  document.getElementById('finalUsername').textContent=final;
+}
+
+function goToLogin(){ window.location.href='login.html'; }
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SheHugs - Username Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap" rel="stylesheet" />
+<style>
+body {
+  margin: 0;
+  font-family: 'Foglighten', serif;
+  background: url('images/flowers.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #4B2C2C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.container {
+  max-width: 650px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(75, 44, 44, 0.25);
+}
+
+h1 { font-size: 2.5em; margin-bottom: 20px; color: #b57a84; }
+.step { margin-top: 20px; }
+.hidden { display: none; }
+select, button { padding: 12px 20px; margin: 10px 0; font-family: 'Foglighten', serif; border-radius: 12px; border: none; font-size: 1em; cursor: pointer; }
+button { background: linear-gradient(135deg, #b57a84, #d8a39d); color: white; box-shadow: 0 4px 10px rgba(181,122,132,0.4); transition: all 0.3s ease; }
+button:hover { transform: scale(1.05); box-shadow: 0 6px 14px rgba(181,122,132,0.6); }
+.usernames, .emojis { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+.option { background: rgba(255,255,255,0.7); padding: 10px 15px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; }
+.option:hover { transform: scale(1.05); background: rgba(255,255,255,0.9); }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Generate Your Anonymous Name 🫶</h1>
+
+<!-- Step 1: Base Name -->
+<div id="step1" class="step">
+  <label>Choose a base name:</label><br>
+  <select id="baseName">
+    <option value="Anonymous">Anonymous</option>
+    <option value="Incognito">Incognito</option>
+    <option value="Unknown">Unknown</option>
+  </select><br>
+  <button onclick="goToStep2()">Next</button>
+</div>
+
+<!-- Step 2: Select Name -->
+<div id="step2" class="step hidden">
+  <h3>Select a name</h3>
+  <div class="usernames" id="usernames"></div>
+</div>
+
+<!-- Step 3: Select Emoji -->
+<div id="step3" class="step hidden">
+  <h3>Select an emoji for your name</h3>
+  <div class="emojis" id="emojiOptions"></div>
+</div>
+
+<!-- Step 4: Final -->
+<div id="step4" class="step hidden">
+  <h3>Your Final Username</h3>
+  <p id="finalUsername"></p>
+  <button onclick="goToLogin()">Continue to Login</button>
+</div>
+</div>
+
+<script>
+const adjectives = {pretty:['Lovely','Beautiful','Sweet','Charming','Radiant'],strong:['Brave','Bold','Fearless','Mighty','Heroic'],gentle:['Soft','Tender','Calm','Kind','Graceful'],creative:['Artful','Imaginative','Dreamy','Inspired','Visionary'],funny:['Cheery','Jolly','Witty','Happy','Sunny']};
+const hobbies = {music:['Melody','Harmony','Rhythm','Lyric','Chord'],reading:['Bookworm','Page','Novel','Story','Verse'],sports:['Runner','Goal','Champion','Ace','Player'],art:['Painter','Sketch','Canvas','Color','Brush'],travel:['Wanderer','Explorer','Journey','Path','Nomad']};
+const styles = {gothic:['Shadow','Raven','Mystic','Night','Obsidian'],pastel:['Blush','Cloud','Cotton','Dream','Petal'],boho:['Gypsy','Sunbeam','Feather','Wander','Meadow'],sporty:['Sprint','Dash','Kick','Flex','Score'],elegant:['Silk','Velvet','Pearl','Grace','Lace']};
+const emojis = ['🌸','🫶','😇','🎵','📚','⚽','🎨','✈️','🖤','🌷','🌻','🏅','💎'];
+
+let selectedBase='', selectedName='', selectedEmoji='';
+let usedEmojis = new Set();
+
+function getRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function generateCategoryNames(categoryObj,count=2){
+  let names = [];
+  const keys = Object.keys(categoryObj);
+  while(names.length < count*keys.length){
+    const cat = getRandom(keys);
+    const name = getRandom(categoryObj[cat]);
+    if(!names.includes(name)) names.push(name);
+  }
+  return names.slice(0,6);
+}
+
+function goToStep2(){
+  selectedBase = document.getElementById('baseName').value;
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+
+  const usernamesDiv = document.getElementById('usernames');
+  usernamesDiv.innerHTML = '';
+  const names = generateCategoryNames({...adjectives,...hobbies,...styles});
+
+  names.forEach(name=>{
+    const div = document.createElement('div');
+    div.textContent = name;
+    div.className='option';
+    div.onclick=()=>{
+      selectedName=name;
+      goToStep3();
     };
+    usernamesDiv.appendChild(div);
+  });
+}
 
-    const styles = {
-      gothic: ['Shadow', 'Raven', 'Mystic', 'Night', 'Obsidian'],
-      pastel: ['Blush', 'Cloud', 'Cotton', 'Dream', 'Petal'],
-      boho: ['Gypsy', 'Sunbeam', 'Feather', 'Wander', 'Meadow'],
-      sporty: ['Sprint', 'Dash', 'Kick', 'Flex', 'Score'],
-      elegant: ['Silk', 'Velvet', 'Pearl', 'Grace', 'Lace']
-    };
+function goToStep3(){
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.remove('hidden');
 
-    const emojis = ['🌸','🫶','😇','🎵','📚','⚽','🎨','✈️','🖤','🌷','🌻','🏅','💎'];
-
-    function getRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-
-    function generateCategoryNames(categoryObj, count=2){
-      let names = [];
-      const keys = Object.keys(categoryObj);
-      while(names.length < count*keys.length){
-        const cat = getRandom(keys);
-        const name = getRandom(categoryObj[cat]);
-        if(!names.includes(name)) names.push(name);
-      }
-      return names.slice(0, 6); // total 6 names
+  const emojiDiv = document.getElementById('emojiOptions');
+  emojiDiv.innerHTML = '';
+  emojis.forEach(emoji=>{
+    if(!usedEmojis.has(emoji)){
+      const div=document.createElement('div');
+      div.textContent=emoji;
+      div.className='option';
+      div.onclick=()=>{
+        selectedEmoji=emoji;
+        usedEmojis.add(emoji);
+        showFinalUsername();
+      };
+      emojiDiv.appendChild(div);
     }
+  });
+}
 
-    let selectedBase = '';
-    let selectedName = '';
-    let selectedEmoji = '';
+function showFinalUsername(){
+  document.getElementById('step3').classList.add('hidden');
+  document.getElementById('step4').classList.remove('hidden');
 
-    function goToStep2(){
-      selectedBase = document.getElementById('baseName').value;
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
+  const final = `${selectedBase} ${selectedName} ${selectedEmoji}`;
+  localStorage.setItem('selectedUsername',final);
+  document.getElementById('finalUsername').textContent=final;
+}
 
-      const usernamesDiv = document.getElementById('usernames');
-      usernamesDiv.innerHTML = '';
-      const names = generateCategoryNames({...adjectives, ...hobbies, ...styles});
-
-      names.forEach(name=>{
-        const div = document.createElement('div');
-        div.textContent = name;
-        div.className='option';
-        div.onclick=()=>{
-          selectedName=name;
-          goToStep3();
-        };
-        usernamesDiv.appendChild(div);
-      });
-    }
-
-    function goToStep3(){
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.remove('hidden');
-
-      const emojiDiv = document.getElementById('emojiOptions');
-      emojiDiv.innerHTML = '';
-      const used = new Set();
-
-      emojis.forEach(emoji=>{
-        const div=document.createElement('div');
-        if(!used.has(emoji)){
-          div.textContent=emoji;
-          div.className='option';
-          div.onclick=()=>{
-            selectedEmoji=emoji;
-            used.add(emoji);
-            showFinalUsername();
-          };
-          emojiDiv.appendChild(div);
-        }
-      });
-    }
-
-    function showFinalUsername(){
-      document.getElementById('step3').classList.add('hidden');
-      document.getElementById('step4').classList.remove('hidden');
-
-      const final = `${selectedBase} ${selectedName} ${selectedEmoji}`;
-      localStorage.setItem('selectedUsername', final);
-      document.getElementById('finalUsername').textContent = final;
-    }
-
-    function goToLogin(){
-      window.location.href='login.html';
-    }
-  </script>
+function goToLogin(){ window.location.href='login.html'; }
+</script>
 </body>
 </html>

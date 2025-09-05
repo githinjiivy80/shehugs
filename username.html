@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SheHugs - Enhanced Username Generator</title>
+
+  <!-- Google Font: Foglighten -->
+  <link href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Foglighten', serif;
+      background: url('flowers.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #4B2C2C;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      position: relative;
+      max-width: 600px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(75, 44, 44, 0.25);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #b57a84;
+    }
+
+    select, .btn {
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+      font-family: 'Foglighten', serif;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #b57a84, #d8a39d);
+      color: white;
+      box-shadow: 0 4px 10px rgba(181, 122, 132, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(181, 122, 132, 0.6);
+    }
+
+    .usernames {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .username-option {
+      background: rgba(255,255,255,0.7);
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .username-option:hover {
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Generate Your Anonymous Name 🫶</h1>
+
+    <label>Personality Trait:</label>
+    <select id="trait">
+      <option value="pretty">Pretty</option>
+      <option value="strong">Strong</option>
+      <option value="gentle">Gentle</option>
+      <option value="creative">Creative</option>
+      <option value="funny">Funny</option>
+    </select>
+    <br />
+
+    <label>Hobby:</label>
+    <select id="hobby">
+      <option value="music">Music</option>
+      <option value="reading">Reading</option>
+      <option value="sports">Sports</option>
+      <option value="art">Art</option>
+      <option value="travel">Travel</option>
+    </select>
+    <br />
+
+    <label>Style / Aesthetic:</label>
+    <select id="style">
+      <option value="gothic">Gothic</option>
+      <option value="pastel">Pastel</option>
+      <option value="boho">Boho</option>
+      <option value="sporty">Sporty</option>
+      <option value="elegant">Elegant</option>
+    </select>
+    <br />
+
+    <button class="btn" onclick="generateNames()">Generate 6 Names</button>
+
+    <div class="usernames" id="usernames"></div>
+  </div>
+
+  <script>
+    const adjectives = {
+      pretty: ['Lovely', 'Beautiful', 'Sweet', 'Charming', 'Radiant'],
+      strong: ['Brave', 'Bold', 'Fearless', 'Mighty', 'Heroic'],
+      gentle: ['Soft', 'Tender', 'Calm', 'Kind', 'Graceful'],
+      creative: ['Artful', 'Imaginative', 'Dreamy', 'Inspired', 'Visionary'],
+      funny: ['Cheery', 'Jolly', 'Witty', 'Happy', 'Sunny']
+    };
+
+    const hobbies = {
+      music: ['Melody', 'Harmony', 'Rhythm', 'Lyric', 'Chord'],
+      reading: ['Bookworm', 'Page', 'Novel', 'Story', 'Verse'],
+      sports: ['Runner', 'Goal', 'Champion', 'Ace', 'Player'],
+      art: ['Painter', 'Sketch', 'Canvas', 'Color', 'Brush'],
+      travel: ['Wanderer', 'Explorer', 'Journey', 'Path', 'Nomad']
+    };
+
+    const styles = {
+      gothic: ['Shadow', 'Raven', 'Mystic', 'Night', 'Obsidian'],
+      pastel: ['Blush', 'Cloud', 'Cotton', 'Dream', 'Petal'],
+      boho: ['Gypsy', 'Sunbeam', 'Feather', 'Wander', 'Meadow'],
+      sporty: ['Sprint', 'Dash', 'Kick', 'Flex', 'Score'],
+      elegant: ['Silk', 'Velvet', 'Pearl', 'Grace', 'Lace']
+    };
+
+    const emojis = {
+      trait: ['🫶','🌸','😇'],
+      hobby: ['🎵','📚','⚽','🎨','✈️'],
+      style: ['🖤','🌷','🌻','🏅','💎']
+    };
+
+    function getRandom(arr){
+      return arr[Math.floor(Math.random()*arr.length)];
+    }
+
+    function generateCategoryNames(categoryObj, emojiArr, selection, count){
+      let names = [];
+      let used = new Set();
+      while(names.length < count){
+        const adj = getRandom(categoryObj[selection]);
+        const emoji = getRandom(emojiArr);
+        const name = `${adj} ${emoji}`;
+        if(!used.has(name)){
+          names.push(name);
+          used.add(name);
+        }
+      }
+      return names;
+    }
+
+    function generateNames(){
+      const trait = document.getElementById('trait').value;
+      const hobby = document.getElementById('hobby').value;
+      const style = document.getElementById('style').value;
+
+      const usernameDiv = document.getElementById('usernames');
+      usernameDiv.innerHTML = '';
+
+      const traitNames = generateCategoryNames(adjectives, emojis.trait, trait, 2);
+      const hobbyNames = generateCategoryNames(hobbies, emojis.hobby, hobby, 2);
+      const styleNames = generateCategoryNames(styles, emojis.style, style, 2);
+
+      const allNames = [...traitNames, ...hobbyNames, ...styleNames];
+
+      allNames.forEach(name => {
+        const div = document.createElement('div');
+        div.textContent = name;
+        div.className = 'username-option';
+        div.onclick = () => alert(`You selected: ${name}`);
+        usernameDiv.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

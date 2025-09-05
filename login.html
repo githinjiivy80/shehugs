@@ -70,18 +70,31 @@
 <body>
   <div class="container">
     <h1>Sign Up / Login</h1>
-    <form>
+    <form onsubmit="submitForm(event)">
       <input type="text" id="username" placeholder="Your username" /><br>
-      <input type="password" placeholder="Password" /><br>
+      <input type="password" id="password" placeholder="Password" /><br>
       <button type="submit">Continue</button>
     </form>
     <a href="index.html">← Back to Home</a>
   </div>
 
   <script>
+    // Auto-fill username from selected username in localStorage
     const storedUsername = localStorage.getItem('selectedUsername');
     if(storedUsername){
       document.getElementById('username').value = storedUsername;
+    }
+
+    // Simple demo submit
+    function submitForm(e){
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if(username && password){
+        alert(`Welcome, ${username}! (This is a demo login)`);
+      } else {
+        alert('Please enter both username and password.');
+      }
     }
   </script>
 </body>

@@ -6,10 +6,7 @@
   <title>SheHugs</title>
 
   <!-- Google Font: Foglighten -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap" rel="stylesheet" />
 
   <style>
     body {
@@ -26,9 +23,11 @@
     }
 
     .container {
+      position: relative;
       max-width: 600px;
       padding: 40px;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.5); /* Slightly transparent to show flowers */
+      backdrop-filter: blur(8px); /* Blurs background behind container */
       border-radius: 20px;
       box-shadow: 0 12px 30px rgba(75, 44, 44, 0.25);
       animation: fadeIn 1.5s ease;

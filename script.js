@@ -1,73 +1,47 @@
-// Store taken usernames (for now, local simulation)
-let takenUsernames = ["AnonymousBraveSinger🌸", "IncognitoFunnyArtist🔥"];
+// Store taken usernames so we can block duplicates
+let takenUsernames = new Set();
 
-let selectedUsername = null;
+function generateUsername() {
+    const hobby = document.getElementById("hobby").value;
+    const personality = document.getElementById("personality").value;
+    const style = document.getElementById("style").value;
+    const emoji = document.getElementById("emoji").value;
 
-// Generate Username Options
-function generateUsernames() {
-  const hobby = document.getElementById("hobby").value;
-  const personality = document.getElementById("personality").value;
-  const style = document.getElementById("style").value;
-  const emoji = document.getElementById("emoji").value;
+    const display = document.getElementById("usernameDisplay");
+    display.innerHTML = ""; // Clear previous results
 
-  const container = document.getElementById("username-options");
-  container.innerHTML = ""; // clear old options
-  selectedUsername = null;
-  document.getElementById("next-btn").classList.add("hidden");
-
-  // Validate all fields
-  if (!hobby || !personality || !style || !emoji) {
-    container.innerHTML = `<p class="error">⚠️ Please select one option in each category.</p>`;
-    return;
-  }
-
-  const prefixes = ["Anonymous", "Unknown", "Incognito"];
-  const generated = [];
-
-  // Create 6 unique usernames
-  while (generated.length < 6) {
-    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-    const combo = `${prefix}${personality}${hobby}${emoji}`;
-    if (!generated.includes(combo)) {
-      generated.push(combo);
+    if (!hobby || !personality || !style || !emoji) {
+        display.innerHTML = "⚠️ Please select one from each section before generating!";
+        return;
     }
-  }
 
-  // Show usernames
-  generated.forEach(name => {
-    const div = document.createElement("div");
-    div.classList.add("username-option");
-    div.innerText = name;
+    // Prefixes
+    const prefixes = ["Anonymous", "Unknown", "Incognito"];
 
-    div.addEventListener("click", () => selectUsername(name, div));
-    container.appendChild(div);
-  });
-}
+    // Generate 6 options (2 from each prefix)
+    let usernames = [];
+    prefixes.forEach(prefix => {
+        usernames.push(`${prefix} ${personality} ${emoji}`);
+        usernames.push(`${prefix} ${hobby} ${style} ${emoji}`);
+    });
 
-// Select a Username
-function selectUsername(name, element) {
-  const options = document.querySelectorAll(".username-option");
-  options.forEach(opt => opt.classList.remove("selected"));
-
-  if (takenUsernames.includes(name)) {
-    element.classList.add("taken");
-    alert("❌ Username not available. Please choose another one.");
-    selectedUsername = null;
-    document.getElementById("next-btn").classList.add("hidden");
-  } else {
-    element.classList.add("selected");
-    selectedUsername = name;
-    document.getElementById("next-btn").classList.remove("hidden");
-  }
-}
-
-// Go to Password Page
-function goToPassword() {
-  if (selectedUsername) {
-    // Save username to localStorage
-    localStorage.setItem("chosenUsername", selectedUsername);
-    window.location.href = "password.html"; 
-  } else {
-    alert("⚠️ Please select a username before continuing.");
-  }
+    // Show results
+    usernames.forEach(name => {
+        // If taken, show "not available"
+        if (takenUsernames.has(name)) {
+            let p = document.createElement("p");
+            p.textContent = `${name} ❌ (Not available)`;
+            display.appendChild(p);
+        } else {
+            let btn = document.createElement("button");
+            btn.textContent = name;
+            btn.onclick = function () {
+                takenUsernames.add(name);
+                localStorage.setItem("chosenUsername", name);
+                alert(`✅ You chose: ${name}`);
+                window.location.href = "password.html"; // redirect to password step
+            };
+            display.appendChild(btn);
+        }
+    });
 }

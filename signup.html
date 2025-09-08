@@ -5,105 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SheHugs 🤗 | Sign Up</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-flower">
+<body>
+  <!-- Background overlay for blur -->
+  <div class="background-overlay"></div>
+
   <div class="signup-container">
-    <h1 class="title">SheHugs 🤗</h1>
+    <h1>SheHugs 🤗</h1>
     <p class="motto">🫶 A Safe Space She Shares & Heals</p>
-    
-    <h2 class="subtitle">Mix & Match Your Faves to Get Your Username</h2>
-    
-    <!-- Hobby Selection -->
-    <div class="option-group">
-      <label for="hobby">🎨 Choose a Hobby</label>
-      <select id="hobby">
-        <option value="">-- Select One --</option>
-        <option value="Singer">Singer</option>
-        <option value="Writer">Writer</option>
-        <option value="Dancer">Dancer</option>
-        <option value="Artist">Artist</option>
-        <option value="Reader">Reader</option>
-        <option value="Chef">Chef</option>
-        <option value="Traveler">Traveler</option>
-        <option value="Coder">Coder</option>
-        <option value="Gardener">Gardener</option>
-        <option value="Photographer">Photographer</option>
-      </select>
-    </div>
 
-    <!-- Personality Selection -->
-    <div class="option-group">
-      <label for="personality">💫 Choose a Personality</label>
-      <select id="personality">
-        <option value="">-- Select One --</option>
-        <option value="Brave">Brave</option>
-        <option value="Calm">Calm</option>
-        <option value="Kind">Kind</option>
-        <option value="Strong">Strong</option>
-        <option value="Funny">Funny</option>
-        <option value="Loyal">Loyal</option>
-        <option value="Dreamer">Dreamer</option>
-        <option value="Creative">Creative</option>
-        <option value="Gentle">Gentle</option>
-        <option value="Smart">Smart</option>
-      </select>
-    </div>
+    <h2>Mix & Match Your Faves to Get Your Username</h2>
 
-    <!-- Style Selection -->
-    <div class="option-group">
-      <label for="style">🖤 Choose a Style</label>
-      <select id="style">
-        <option value="">-- Select One --</option>
-        <option value="Goth">Goth</option>
-        <option value="Chic">Chic</option>
-        <option value="Classic">Classic</option>
-        <option value="Boho">Boho</option>
-        <option value="Sporty">Sporty</option>
-        <option value="Vintage">Vintage</option>
-        <option value="Casual">Casual</option>
-        <option value="Royal">Royal</option>
-        <option value="Modern">Modern</option>
-        <option value="Minimalist">Minimalist</option>
-      </select>
-    </div>
+    <!-- Hobby -->
+    <label for="hobby">🌸 Choose a Hobby</label>
+    <select id="hobby">
+      <option value="">-- Select One --</option>
+      <option>Writer</option>
+      <option>Singer</option>
+      <option>Artist</option>
+      <option>Dancer</option>
+      <option>Traveler</option>
+      <option>Reader</option>
+      <option>Dreamer</option>
+      <option>Healer</option>
+      <option>Chef</option>
+      <option>Gardener</option>
+      <option>Painter</option>
+      <option>Designer</option>
+      <option>Photographer</option>
+      <option>Thinker</option>
+      <option>Leader</option>
+      <option>Creator</option>
+      <option>Innovator</option>
+      <option>Believer</option>
+      <option>Teacher</option>
+      <option>Explorer</option>
+    </select>
 
-    <!-- Emoji Selection -->
-    <div class="option-group">
-      <label for="emoji">😊 Choose Your Emoji</label>
-      <select id="emoji">
-        <option value="">-- Select One --</option>
-        <option value="🌸">🌸</option>
-        <option value="🌻">🌻</option>
-        <option value="🌹">🌹</option>
-        <option value="💐">💐</option>
-        <option value="🍀">🍀</option>
-        <option value="⭐">⭐</option>
-        <option value="🔥">🔥</option>
-        <option value="🌙">🌙</option>
-        <option value="💎">💎</option>
-        <option value="🎶">🎶</option>
-        <option value="✨">✨</option>
-        <option value="💫">💫</option>
-        <option value="🎨">🎨</option>
-        <option value="🦋">🦋</option>
-        <option value="😇">😇</option>
-        <option value="😎">😎</option>
-        <option value="🥰">🥰</option>
-        <option value="😈">😈</option>
-        <option value="👑">👑</option>
-        <option value="🤍">🤍</option>
-      </select>
-    </div>
+    <!-- Personality -->
+    <label for="personality">🌙 Choose a Personality</label>
+    <select id="personality">
+      <option value="">-- Select One --</option>
+      <option>Strong</option>
+      <option>Kind</option>
+      <option>Joyful</option>
+      <option>Brave</option>
+      <option>Calm</option>
+      <option>Gentle</option>
+      <option>Fierce</option>
+      <option>Wise</option>
+      <option>Bold</option>
+      <option>Loving</option>
+      <option>Confident</option>
+      <option>Faithful</option>
+      <option>Graceful</option>
+      <option>Bright</option>
+      <option>Hopeful</option>
+      <option>Cheerful</option>
+      <option>Creative</option>
+      <option>Peaceful</option>
+      <option>Adventurous</option>
+      <option>Playful</option>
+    </select>
 
-    <!-- Generate Button -->
-    <button onclick="generateUsernames()" class="btn">✨ Generate Username</button>
-    
-    <!-- Username Options -->
-    <div id="username-options" class="username-list"></div>
+    <!-- Style -->
+    <label for="style">🖤 Choose a Style</label>
+    <select id="style">
+      <option value="">-- Select One --</option>
+      <option>Pretty</option>
+      <option>Chic</option>
+      <option>Classic</option>
+      <option>Modern</option>
+      <option>Vintage</option>
+      <option>Boho</option>
+      <option>Edgy</option>
+      <option>Simple</option>
+      <option>Trendy</option>
+      <option>Elegant</option>
+      <option>Sporty</option>
+      <option>Funky</option>
+      <option>Soft</option>
+      <option>Cool</option>
+      <option>Unique</option>
+      <option>Royal</option>
+      <option>Sweet</option>
+      <option>Strong</option>
+      <option>Warm</option>
+      <option>Cozy</option>
+    </select>
 
-    <!-- Next Button -->
-    <button id="next-btn" class="btn hidden" onclick="goToPassword()">Next ➡️</button>
+    <!-- Emoji -->
+    <label for="emoji">🌻 Choose Your Emoji</label>
+    <select id="emoji">
+      <option value="">-- Select One --</option>
+      <option>😊</option>
+      <option>🥰</option>
+      <option>🤍</option>
+      <option>🌸</option>
+      <option>✨</option>
+      <option>🌙</option>
+      <option>💫</option>
+      <option>🦋</option>
+      <option>🌷</option>
+      <option>🌼</option>
+      <option>🍒</option>
+      <option>🍀</option>
+      <option>☀️</option>
+      <option>🌹</option>
+      <option>🔥</option>
+      <option>💎</option>
+      <option>⭐</option>
+      <option>🌻</option>
+      <option>🎶</option>
+      <option>💐</option>
+    </select>
+
+    <button onclick="generateUsername()">✨ Generate Username</button>
+
+    <div id="usernameDisplay"></div>
   </div>
 
   <script src="script.js"></script>

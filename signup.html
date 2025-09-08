@@ -3,45 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - SheHugs 🌸</title>
+  <title>Sign Up 🤗 | SheHugs</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-floral">
+  <div class="overlay"></div>
   <div class="container">
-    <h2>Create Your Username 🌸</h2>
-    <p>Select the things below in order to have a username generated:</p>
+    <h1 class="logo">🤗 SheHugs 🫶</h1>
+    <div class="card">
+      <h2 class="subtitle">Mix and match your faves to get your username generated ✨</h2>
 
-    <form id="signupForm">
-      <label for="keyword">Enter a keyword you love 💕:</label>
-      <input type="text" id="keyword" name="keyword" required>
+      <form id="signupForm" class="form">
+        <div class="form-group">
+          <label for="category">Pick a Category 🌸</label>
+          <select id="category" required>
+            <option value="">-- Choose --</option>
+            <option value="flower">Flower</option>
+            <option value="star">Star</option>
+            <option value="gem">Gem</option>
+          </select>
+        </div>
 
-      <label for="emoji">Choose an emoji 🌸:</label>
-      <select id="emoji" name="emoji" required>
-        <option>🌸</option>
-        <option>🌷</option>
-        <option>🌹</option>
-        <option>🌺</option>
-        <option>🌼</option>
-        <option>🌻</option>
-        <option>🌱</option>
-        <option>🌿</option>
-        <option>🍃</option>
-        <option>🍂</option>
-        <option>✨</option>
-        <option>💫</option>
-        <option>🌙</option>
-        <option>☁️</option>
-        <option>💐</option>
-        <option>🪻</option>
-        <option>🌞</option>
-        <option>🌛</option>
-        <option>⭐</option>
-        <option>🕊️</option>
-      </select>
+        <div class="form-group">
+          <label for="style">Pick a Style 🎨</label>
+          <select id="style" required>
+            <option value="">-- Choose --</option>
+            <option value="soft">Soft</option>
+            <option value="bold">Bold</option>
+            <option value="sparkle">Sparkle</option>
+          </select>
+        </div>
 
-      <button type="submit" class="btn">Generate Username ✨</button>
-    </form>
-    <p id="usernameResult" class="fade-text"></p>
+        <div class="form-group">
+          <button type="button" class="btn" onclick="generateUsername()">✨ Generate Username</button>
+        </div>
+
+        <div id="usernameResult" class="username-result"></div>
+
+        <div class="form-group">
+          <button type="submit" class="btn">Sign Up</button>
+        </div>
+      </form>
+
+      <p class="login-text">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>

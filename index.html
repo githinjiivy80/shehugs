@@ -4,52 +4,123 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SheHugs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet" />
+
+  <!-- Google Font: Playfair Display -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
+    /* Soft rose-gold theme + floral texture overlay (your original aesthetic) */
     body {
       margin: 0;
-      font-family: 'Playfair Display', serif;
+      padding: 0;
+      font-family: "Playfair Display", serif;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0') no-repeat center/cover;
-      color: white;
-    }
-    .container {
-      background: rgba(0,0,0,0.6);
-      padding: 40px;
-      border-radius: 20px;
       text-align: center;
+      color: #5c4742; /* leather */
+      background: linear-gradient(135deg, #fce3df, #eaccc2, #d9a7a0);
+      position: relative;
     }
+
+    /* subtle floral texture overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("https://www.transparenttextures.com/patterns/arabesque.png");
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      padding: 44px;
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(92, 71, 66, 0.18);
+    }
+
     h1 {
-      font-size: 3em;
-      margin-bottom: 15px;
+      font-size: 2.9rem;
+      margin: 0 0 12px 0;
+      color: #b57a84; /* mauve */
+      font-weight: 600;
+      animation: glow 3s infinite alternate;
+      line-height: 1.05;
     }
-    p {
-      font-size: 1.4em;
-      margin-bottom: 35px;
+
+    p.motto {
+      font-size: 1.15rem;
+      margin: 0 0 28px 0;
+      color: #5c4742;
+      opacity: 0.95;
     }
-    button {
-      margin: 10px;
-      padding: 12px 25px;
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      background: #f1c40f;
-      font-size: 18px;
-      font-family: inherit;
-      transition: 0.3s;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      text-decoration: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
-    button:hover { background: #d4ac0d; }
+
+    .signup {
+      background: linear-gradient(135deg, #b57a84, #d8a39d);
+      box-shadow: 0 6px 18px rgba(181,122,132,0.18);
+    }
+    .signup:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(181,122,132,0.22); }
+
+    .login {
+      background: linear-gradient(135deg, #5c4742, #9f8c86);
+      box-shadow: 0 6px 18px rgba(92,71,66,0.14);
+    }
+    .login:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(92,71,66,0.18); }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 6px #eaccc2, 0 0 12px #d9a7a0; }
+      to   { text-shadow: 0 0 14px #fce3df, 0 0 26px #d8a39d; }
+    }
+
+    /* responsive */
+    @media (max-width: 540px) {
+      .container { padding: 28px; }
+      h1 { font-size: 2.2rem; }
+      p.motto { font-size: 1rem; }
+      .buttons { flex-direction: column; gap: 12px; }
+      .btn { width: 80%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Welcome to SheHugs 🤗</h1>
-    <p>A safe space she shares and heals 🫶</p>
-    <button onclick="window.location.href='signup.html'">Sign Up</button>
-    <button onclick="window.location.href='login.html'">Log In</button>
+    <p class="motto">A safe space she shares and heals 🫶</p>
+
+    <div class="buttons">
+      <a href="signup.html" class="btn signup">Sign Up</a>
+      <a href="login.html" class="btn login">Log In</a>
+    </div>
   </div>
 </body>
 </html>

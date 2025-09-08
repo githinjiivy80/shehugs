@@ -3,195 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - SheHugs 🤗🫶</title>
+  <title>Sign Up - SheHugs</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: "Playfair Display", serif;
-      background: url("download (3).jpeg") no-repeat center center fixed;
-      background-size: cover;
-      color: #4B2C2C;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(4px);
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 20px;
-      box-shadow: 0 12px 30px rgba(92, 71, 66, 0.25);
-      animation: fadeIn 1.5s ease;
-    }
-
-    h1.title {
-      font-size: 3em;
-      margin-bottom: 10px;
-      color: #b57a84;
-      font-weight: 600;
-      animation: glow 3s infinite alternate;
-    }
-
-    h2.subtitle {
-      font-size: 1.3em;
-      margin-bottom: 25px;
-      color: #5c4742;
-      opacity: 0.9;
-    }
-
-    .input-group {
-      margin-bottom: 25px;
-      text-align: left;
-    }
-
-    .input-group label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #5c4742;
-    }
-
-    .options-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    select, input[type="checkbox"] {
-      accent-color: #b57a84;
-    }
-
-    select {
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #b57a84;
-      font-family: "Playfair Display", serif;
-    }
-
-    .btn {
-      padding: 12px 28px;
-      font-size: 1.1em;
-      font-weight: bold;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: linear-gradient(135deg, #b57a84, #d8a39d);
-      color: white;
-      box-shadow: 0 4px 10px rgba(181, 122, 132, 0.4);
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 14px rgba(181, 122, 132, 0.6);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #eaccc2, 0 0 10px #d9a7a0; }
-      to { text-shadow: 0 0 15px #fce3df, 0 0 25px #d8a39d; }
-    }
-  </style>
 </head>
-<body>
+<body class="bg">
   <div class="container">
-    <h1 class="title">SheHugs 🤗🫶</h1>
-    <h2 class="subtitle">Mix and match your faves to get your username 🌸</h2>
-
-    <form id="signup-form">
-      <!-- Hobbies -->
-      <div class="input-group">
-        <label>✨ Choose Hobbies</label>
-        <div class="options-grid">
-          <label><input type="checkbox" name="hobbies" value="Singer"> Singer</label>
-          <label><input type="checkbox" name="hobbies" value="Artist"> Artist</label>
-          <label><input type="checkbox" name="hobbies" value="Reader"> Reader</label>
-          <label><input type="checkbox" name="hobbies" value="Dancer"> Dancer</label>
-          <label><input type="checkbox" name="hobbies" value="Writer"> Writer</label>
-          <label><input type="checkbox" name="hobbies" value="Traveler"> Traveler</label>
-          <label><input type="checkbox" name="hobbies" value="Chef"> Chef</label>
-          <label><input type="checkbox" name="hobbies" value="Gamer"> Gamer</label>
-        </div>
-      </div>
-
-      <!-- Personalities -->
-      <div class="input-group">
-        <label>🌼 Choose Personalities</label>
-        <div class="options-grid">
-          <label><input type="checkbox" name="personalities" value="Kind"> Kind</label>
-          <label><input type="checkbox" name="personalities" value="Strong"> Strong</label>
-          <label><input type="checkbox" name="personalities" value="Brave"> Brave</label>
-          <label><input type="checkbox" name="personalities" value="Dreamer"> Dreamer</label>
-          <label><input type="checkbox" name="personalities" value="Gentle"> Gentle</label>
-          <label><input type="checkbox" name="personalities" value="Bold"> Bold</label>
-          <label><input type="checkbox" name="personalities" value="Creative"> Creative</label>
-          <label><input type="checkbox" name="personalities" value="Happy"> Happy</label>
-        </div>
-      </div>
-
-      <!-- Styles -->
-      <div class="input-group">
-        <label>🌙 Choose Styles</label>
-        <div class="options-grid">
-          <label><input type="checkbox" name="styles" value="Chic"> Chic</label>
-          <label><input type="checkbox" name="styles" value="Gothic"> Gothic</label>
-          <label><input type="checkbox" name="styles" value="Casual"> Casual</label>
-          <label><input type="checkbox" name="styles" value="Vintage"> Vintage</label>
-          <label><input type="checkbox" name="styles" value="Modern"> Modern</label>
-          <label><input type="checkbox" name="styles" value="Sporty"> Sporty</label>
-          <label><input type="checkbox" name="styles" value="Elegant"> Elegant</label>
-          <label><input type="checkbox" name="styles" value="Boho"> Boho</label>
-        </div>
-      </div>
-
-      <!-- Emoji Selection -->
-      <div class="input-group">
-        <label>💖 Choose Emoji</label>
-        <select id="emoji">
-          <option value="🌸">🌸</option>
-          <option value="🌼">🌼</option>
-          <option value="🌺">🌺</option>
-          <option value="🌹">🌹</option>
-          <option value="🌻">🌻</option>
-          <option value="✨">✨</option>
-          <option value="💖">💖</option>
-          <option value="💕">💕</option>
-          <option value="💫">💫</option>
-          <option value="🌙">🌙</option>
-          <option value="🌷">🌷</option>
-          <option value="🍀">🍀</option>
-          <option value="🌿">🌿</option>
-          <option value="🎶">🎶</option>
-          <option value="🎨">🎨</option>
-          <option value="📖">📖</option>
-          <option value="🪻">🪻</option>
-          <option value="🌞">🌞</option>
-          <option value="⭐">⭐</option>
-          <option value="🌈">🌈</option>
+    <h1 class="title">Mix and match your faves to get your username generated 🤗🫶</h1>
+    <form id="signupForm" class="form-card">
+      
+      <!-- Emoji -->
+      <div class="form-group">
+        <label for="emoji">Pick an emoji:</label>
+        <select id="emoji" name="emoji" required>
+          <option value="">-- Select an emoji --</option>
+          <option>😊</option>
+          <option>🌸</option>
+          <option>🌹</option>
+          <option>🌼</option>
+          <option>🌷</option>
+          <option>💫</option>
+          <option>✨</option>
+          <option>🌻</option>
+          <option>🌺</option>
+          <option>🌿</option>
+          <option>🍀</option>
+          <option>🌞</option>
+          <option>🌙</option>
+          <option>⭐</option>
+          <option>🦋</option>
+          <option>🐚</option>
+          <option>🍓</option>
+          <option>🥰</option>
+          <option>🤍</option>
+          <option>🫶</option>
         </select>
       </div>
 
-      <!-- Generate Button -->
-      <button type="button" id="generate-username-btn" class="btn">Generate Username 🌟</button>
+      <!-- Hobby -->
+      <div class="form-group">
+        <label for="hobby">Choose a hobby:</label>
+        <select id="hobby" name="hobby" required>
+          <option value="">-- Select a hobby --</option>
+          <option>Artist</option>
+          <option>Singer</option>
+          <option>Dancer</option>
+          <option>Writer</option>
+          <option>Traveler</option>
+          <option>Chef</option>
+          <option>Reader</option>
+          <option>Gamer</option>
+          <option>Swimmer</option>
+          <option>Dreamer</option>
+          <option>Painter</option>
+          <option>Designer</option>
+          <option>Gardener</option>
+          <option>Runner</option>
+          <option>Climber</option>
+          <option>Musician</option>
+          <option>Thinker</option>
+          <option>Explorer</option>
+          <option>Listener</option>
+          <option>Creator</option>
+        </select>
+      </div>
+
+      <!-- Personality -->
+      <div class="form-group">
+        <label for="personality">Pick a personality trait:</label>
+        <select id="personality" name="personality" required>
+          <option value="">-- Select a personality --</option>
+          <option>Kind</option>
+          <option>Brave</option>
+          <option>Funny</option>
+          <option>Strong</option>
+          <option>Sweet</option>
+          <option>Loyal</option>
+          <option>Gentle</option>
+          <option>Calm</option>
+          <option>Happy</option>
+          <option>Honest</option>
+          <option>Unique</option>
+          <option>Charming</option>
+          <option>Confident</option>
+          <option>Curious</option>
+          <option>Dreamy</option>
+          <option>Passionate</option>
+          <option>Peaceful</option>
+          <option>Wise</option>
+          <option>Friendly</option>
+          <option>Cheerful</option>
+        </select>
+      </div>
+
+      <!-- Style -->
+      <div class="form-group">
+        <label for="style">Pick a style:</label>
+        <select id="style" name="style" required>
+          <option value="">-- Select a style --</option>
+          <option>Pretty</option>
+          <option>Elegant</option>
+          <option>Cool</option>
+          <option>Chic</option>
+          <option>Classy</option>
+          <option>Soft</option>
+          <option>Bold</option>
+          <option>Minimal</option>
+          <option>Lovely</option>
+          <option>Fresh</option>
+          <option>Sunny</option>
+          <option>Cozy</option>
+          <option>Warm</option>
+          <option>Bright</option>
+          <option>Radiant</option>
+          <option>Shiny</option>
+          <option>Glowing</option>
+          <option>Pure</option>
+          <option>Sweetheart</option>
+          <option>Delightful</option>
+        </select>
+      </div>
+
+      <!-- Generate Username Button -->
+      <button type="button" id="generateUsername">Generate Username</button>
+
+      <!-- Username Output -->
+      <div id="generatedUsername" class="generated-username"></div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Now create a memorable password 🥰😊</label>
+        <input type="password" id="password" name="password" minlength="4" maxlength="10" required>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">Sign Up</button>
     </form>
   </div>
 

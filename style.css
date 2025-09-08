@@ -6,146 +6,164 @@
 }
 
 body {
-  margin: 0;
   font-family: "Playfair Display", serif;
-  color: #5c4742;
-  height: 100vh;
+  color: #5c4742; /* soft leather text */
+  text-align: center;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  background: url("images/background.jpeg") no-repeat center center fixed;
+  background: url("download (3).jpeg") no-repeat center center fixed;
   background-size: cover;
   position: relative;
 }
 
+/* Overlay for soft tint */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(252, 227, 223, 0.7); /* rose gold transparent overlay */
+  backdrop-filter: blur(2px);
   z-index: 0;
 }
 
+/* Container */
 .container {
   position: relative;
   z-index: 1;
-  max-width: 700px;
-  padding: 40px;
   background: rgba(255, 255, 255, 0.8);
+  padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(92, 71, 66, 0.25);
+  box-shadow: 0 8px 25px rgba(92, 71, 66, 0.25);
+  max-width: 650px;
+  width: 90%;
   animation: fadeIn 1.5s ease;
 }
 
-h1.title {
-  font-size: 3em;
+/* Heading */
+h1 {
+  font-size: 2.5em;
+  color: #b57a84; /* mauve */
   margin-bottom: 15px;
-  color: #b57a84;
   font-weight: 600;
-  animation: glow 3s infinite alternate;
+  text-shadow: 0 0 10px rgba(217, 167, 160, 0.5);
 }
 
-h2.subtitle {
-  font-size: 1.6em;
-  margin-bottom: 20px;
-  color: #5c4742;
-  opacity: 0.9;
-}
-
+/* Paragraphs */
 p {
   font-size: 1.2em;
-  margin-bottom: 20px;
-  color: #5c4742;
+  margin-bottom: 25px;
   opacity: 0.9;
+}
+
+/* Form Sections */
+.section {
+  margin: 25px 0;
+}
+
+.section label {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #5c4742;
+}
+
+/* Select dropdowns */
+select {
+  padding: 12px;
+  width: 80%;
+  border: 2px solid #d9a7a0;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #b57a84;
+  box-shadow: 0 0 8px rgba(181, 122, 132, 0.5);
 }
 
 /* Buttons */
-.btn {
+button {
   padding: 12px 28px;
-  font-size: 1em;
-  font-weight: bold;
   border: none;
   border-radius: 12px;
+  font-size: 1em;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.generate-btn {
   background: linear-gradient(135deg, #b57a84, #d8a39d);
-  color: white;
-  box-shadow: 0 4px 10px rgba(181, 122, 132, 0.4);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(181, 122, 132, 0.4);
 }
 
-.btn:hover {
+.generate-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 14px rgba(181, 122, 132, 0.6);
+  box-shadow: 0 6px 16px rgba(181, 122, 132, 0.6);
 }
 
-.btn-secondary {
+.next-btn {
   background: linear-gradient(135deg, #5c4742, #9f8c86);
-  color: white;
-  box-shadow: 0 4px 10px rgba(92, 71, 66, 0.4);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(92, 71, 66, 0.4);
+  margin-top: 20px;
 }
 
-.btn-secondary:hover {
+.next-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 14px rgba(92, 71, 66, 0.6);
+  box-shadow: 0 6px 16px rgba(92, 71, 66, 0.6);
 }
 
-/* Options Layout */
-.options-section {
-  margin-bottom: 25px;
-  text-align: left;
+/* Username Options */
+#username-options {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
-.options-section h3 {
-  margin-bottom: 10px;
-  color: #b57a84;
-}
-
-.option-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.option-list label {
+.username-option {
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid #d9a7a0;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.95em;
-}
-
-.option-list input[type="radio"] {
-  display: none;
-}
-
-.option-list input[type="radio"]:checked + span {
-  color: white;
-  background: linear-gradient(135deg, #b57a84, #d8a39d);
-  border-color: #b57a84;
-}
-
-/* Special for emoji options */
-.option-list span.emoji {
-  font-size: 1.3em;
-}
-
-/* Username Display */
-.username-box {
-  font-size: 1.6em;
+  padding: 12px;
+  border-radius: 12px;
   font-weight: bold;
-  margin: 20px 0;
-  color: #b57a84;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Errors */
-.error-message {
-  color: #b21e35;
-  font-size: 0.95em;
-  margin-top: 8px;
+.username-option:hover {
+  background: #fce3df;
+  transform: scale(1.05);
+}
+
+.username-option.selected {
+  background: #b57a84;
+  color: white;
+  border-color: #b57a84;
+  box-shadow: 0 4px 12px rgba(181, 122, 132, 0.6);
+}
+
+.username-option.taken {
+  background: #ddd;
+  color: #888;
+  border-color: #999;
+  cursor: not-allowed;
+}
+
+/* Hidden state */
+.hidden {
+  display: none;
 }
 
 /* Animations */
@@ -157,14 +175,5 @@ p {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes glow {
-  from {
-    text-shadow: 0 0 5px #eaccc2, 0 0 10px #d9a7a0;
-  }
-  to {
-    text-shadow: 0 0 15px #fce3df, 0 0 25px #d8a39d;
   }
 }

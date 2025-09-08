@@ -3,141 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - SheHugs</title>
+  <title>SheHugs 🤗 | Sign Up</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg">
-  <div class="container">
-    <h1 class="title">Mix and match your faves to get your username generated 🤗🫶</h1>
-    <form id="signupForm" class="form-card">
-      
-      <!-- Emoji -->
-      <div class="form-group">
-        <label for="emoji">Pick an emoji:</label>
-        <select id="emoji" name="emoji" required>
-          <option value="">-- Select an emoji --</option>
-          <option>😊</option>
-          <option>🌸</option>
-          <option>🌹</option>
-          <option>🌼</option>
-          <option>🌷</option>
-          <option>💫</option>
-          <option>✨</option>
-          <option>🌻</option>
-          <option>🌺</option>
-          <option>🌿</option>
-          <option>🍀</option>
-          <option>🌞</option>
-          <option>🌙</option>
-          <option>⭐</option>
-          <option>🦋</option>
-          <option>🐚</option>
-          <option>🍓</option>
-          <option>🥰</option>
-          <option>🤍</option>
-          <option>🫶</option>
-        </select>
-      </div>
+<body class="bg-flower">
+  <div class="signup-container">
+    <h1 class="title">SheHugs 🤗</h1>
+    <p class="motto">🫶 A Safe Space She Shares & Heals</p>
+    
+    <h2 class="subtitle">Mix & Match Your Faves to Get Your Username</h2>
+    
+    <!-- Hobby Selection -->
+    <div class="option-group">
+      <label for="hobby">🎨 Choose a Hobby</label>
+      <select id="hobby">
+        <option value="">-- Select One --</option>
+        <option value="Singer">Singer</option>
+        <option value="Writer">Writer</option>
+        <option value="Dancer">Dancer</option>
+        <option value="Artist">Artist</option>
+        <option value="Reader">Reader</option>
+        <option value="Chef">Chef</option>
+        <option value="Traveler">Traveler</option>
+        <option value="Coder">Coder</option>
+        <option value="Gardener">Gardener</option>
+        <option value="Photographer">Photographer</option>
+      </select>
+    </div>
 
-      <!-- Hobby -->
-      <div class="form-group">
-        <label for="hobby">Choose a hobby:</label>
-        <select id="hobby" name="hobby" required>
-          <option value="">-- Select a hobby --</option>
-          <option>Artist</option>
-          <option>Singer</option>
-          <option>Dancer</option>
-          <option>Writer</option>
-          <option>Traveler</option>
-          <option>Chef</option>
-          <option>Reader</option>
-          <option>Gamer</option>
-          <option>Swimmer</option>
-          <option>Dreamer</option>
-          <option>Painter</option>
-          <option>Designer</option>
-          <option>Gardener</option>
-          <option>Runner</option>
-          <option>Climber</option>
-          <option>Musician</option>
-          <option>Thinker</option>
-          <option>Explorer</option>
-          <option>Listener</option>
-          <option>Creator</option>
-        </select>
-      </div>
+    <!-- Personality Selection -->
+    <div class="option-group">
+      <label for="personality">💫 Choose a Personality</label>
+      <select id="personality">
+        <option value="">-- Select One --</option>
+        <option value="Brave">Brave</option>
+        <option value="Calm">Calm</option>
+        <option value="Kind">Kind</option>
+        <option value="Strong">Strong</option>
+        <option value="Funny">Funny</option>
+        <option value="Loyal">Loyal</option>
+        <option value="Dreamer">Dreamer</option>
+        <option value="Creative">Creative</option>
+        <option value="Gentle">Gentle</option>
+        <option value="Smart">Smart</option>
+      </select>
+    </div>
 
-      <!-- Personality -->
-      <div class="form-group">
-        <label for="personality">Pick a personality trait:</label>
-        <select id="personality" name="personality" required>
-          <option value="">-- Select a personality --</option>
-          <option>Kind</option>
-          <option>Brave</option>
-          <option>Funny</option>
-          <option>Strong</option>
-          <option>Sweet</option>
-          <option>Loyal</option>
-          <option>Gentle</option>
-          <option>Calm</option>
-          <option>Happy</option>
-          <option>Honest</option>
-          <option>Unique</option>
-          <option>Charming</option>
-          <option>Confident</option>
-          <option>Curious</option>
-          <option>Dreamy</option>
-          <option>Passionate</option>
-          <option>Peaceful</option>
-          <option>Wise</option>
-          <option>Friendly</option>
-          <option>Cheerful</option>
-        </select>
-      </div>
+    <!-- Style Selection -->
+    <div class="option-group">
+      <label for="style">🖤 Choose a Style</label>
+      <select id="style">
+        <option value="">-- Select One --</option>
+        <option value="Goth">Goth</option>
+        <option value="Chic">Chic</option>
+        <option value="Classic">Classic</option>
+        <option value="Boho">Boho</option>
+        <option value="Sporty">Sporty</option>
+        <option value="Vintage">Vintage</option>
+        <option value="Casual">Casual</option>
+        <option value="Royal">Royal</option>
+        <option value="Modern">Modern</option>
+        <option value="Minimalist">Minimalist</option>
+      </select>
+    </div>
 
-      <!-- Style -->
-      <div class="form-group">
-        <label for="style">Pick a style:</label>
-        <select id="style" name="style" required>
-          <option value="">-- Select a style --</option>
-          <option>Pretty</option>
-          <option>Elegant</option>
-          <option>Cool</option>
-          <option>Chic</option>
-          <option>Classy</option>
-          <option>Soft</option>
-          <option>Bold</option>
-          <option>Minimal</option>
-          <option>Lovely</option>
-          <option>Fresh</option>
-          <option>Sunny</option>
-          <option>Cozy</option>
-          <option>Warm</option>
-          <option>Bright</option>
-          <option>Radiant</option>
-          <option>Shiny</option>
-          <option>Glowing</option>
-          <option>Pure</option>
-          <option>Sweetheart</option>
-          <option>Delightful</option>
-        </select>
-      </div>
+    <!-- Emoji Selection -->
+    <div class="option-group">
+      <label for="emoji">😊 Choose Your Emoji</label>
+      <select id="emoji">
+        <option value="">-- Select One --</option>
+        <option value="🌸">🌸</option>
+        <option value="🌻">🌻</option>
+        <option value="🌹">🌹</option>
+        <option value="💐">💐</option>
+        <option value="🍀">🍀</option>
+        <option value="⭐">⭐</option>
+        <option value="🔥">🔥</option>
+        <option value="🌙">🌙</option>
+        <option value="💎">💎</option>
+        <option value="🎶">🎶</option>
+        <option value="✨">✨</option>
+        <option value="💫">💫</option>
+        <option value="🎨">🎨</option>
+        <option value="🦋">🦋</option>
+        <option value="😇">😇</option>
+        <option value="😎">😎</option>
+        <option value="🥰">🥰</option>
+        <option value="😈">😈</option>
+        <option value="👑">👑</option>
+        <option value="🤍">🤍</option>
+      </select>
+    </div>
 
-      <!-- Generate Username Button -->
-      <button type="button" id="generateUsername">Generate Username</button>
+    <!-- Generate Button -->
+    <button onclick="generateUsernames()" class="btn">✨ Generate Username</button>
+    
+    <!-- Username Options -->
+    <div id="username-options" class="username-list"></div>
 
-      <!-- Username Output -->
-      <div id="generatedUsername" class="generated-username"></div>
-
-      <!-- Password -->
-      <div class="form-group">
-        <label for="password">Now create a memorable password 🥰😊</label>
-        <input type="password" id="password" name="password" minlength="4" maxlength="10" required>
-      </div>
-
-      <!-- Submit -->
-      <button type="submit">Sign Up</button>
-    </form>
+    <!-- Next Button -->
+    <button id="next-btn" class="btn hidden" onclick="goToPassword()">Next ➡️</button>
   </div>
 
   <script src="script.js"></script>

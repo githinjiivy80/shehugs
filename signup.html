@@ -3,213 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - She Hugs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: url('flowers-bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-    }
-    .container {
-      background: rgba(0, 0, 0, 0.65);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 600px;
-      text-align: center;
-    }
-    h1, h2, p { margin-bottom: 15px; }
-    select, button, input {
-      margin: 10px 0;
-      padding: 10px;
-      font-family: inherit;
-      border-radius: 10px;
-      border: none;
-    }
-    button {
-      background: #f1c40f;
-      cursor: pointer;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-    button:hover { background: #d4ac0d; }
-    .results {
-      margin-top: 20px;
-      font-size: 18px;
-      font-style: italic;
-    }
-  </style>
+  <title>Sign Up - SheHugs 🌸</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>She Hugs 💕</h1>
-    <p>A safe space she shares and heals</p>
+    <h2>Create Your Username 🌸</h2>
+    <p>Select the things below in order to have a username generated:</p>
 
-    <h2>Sign Up</h2>
-    <p>Select the things below in order to have a username generated…</p>
+    <form id="signupForm">
+      <label for="keyword">Enter a keyword you love 💕:</label>
+      <input type="text" id="keyword" name="keyword" required>
 
-    <!-- Personality -->
-    <label for="personality">Choose a personality:</label><br>
-    <select id="personality">
-      <option value="Kind">Kind</option>
-      <option value="Strong">Strong</option>
-      <option value="Brave">Brave</option>
-      <option value="Dreamer">Dreamer</option>
-      <option value="Calm">Calm</option>
-      <option value="Loyal">Loyal</option>
-      <option value="Smart">Smart</option>
-      <option value="Caring">Caring</option>
-      <option value="Funny">Funny</option>
-      <option value="Bold">Bold</option>
-      <option value="Gentle">Gentle</option>
-      <option value="Creative">Creative</option>
-      <option value="Hopeful">Hopeful</option>
-      <option value="Peaceful">Peaceful</option>
-      <option value="Confident">Confident</option>
-      <option value="Adventurous">Adventurous</option>
-      <option value="Loving">Loving</option>
-      <option value="Wise">Wise</option>
-      <option value="Pure">Pure</option>
-      <option value="Bright">Bright</option>
-    </select><br>
+      <label for="emoji">Choose an emoji 🌸:</label>
+      <select id="emoji" name="emoji" required>
+        <option>🌸</option>
+        <option>🌷</option>
+        <option>🌹</option>
+        <option>🌺</option>
+        <option>🌼</option>
+        <option>🌻</option>
+        <option>🌱</option>
+        <option>🌿</option>
+        <option>🍃</option>
+        <option>🍂</option>
+        <option>✨</option>
+        <option>💫</option>
+        <option>🌙</option>
+        <option>☁️</option>
+        <option>💐</option>
+        <option>🪻</option>
+        <option>🌞</option>
+        <option>🌛</option>
+        <option>⭐</option>
+        <option>🕊️</option>
+      </select>
 
-    <!-- Hobby -->
-    <label for="hobby">Choose a hobby:</label><br>
-    <select id="hobby">
-      <option value="Reader">Reader</option>
-      <option value="Singer">Singer</option>
-      <option value="Dancer">Dancer</option>
-      <option value="Artist">Artist</option>
-      <option value="Writer">Writer</option>
-      <option value="Cook">Cook</option>
-      <option value="Traveler">Traveler</option>
-      <option value="Athlete">Athlete</option>
-      <option value="Painter">Painter</option>
-      <option value="Photographer">Photographer</option>
-      <option value="Designer">Designer</option>
-      <option value="Poet">Poet</option>
-      <option value="Gardener">Gardener</option>
-      <option value="Musician">Musician</option>
-      <option value="Swimmer">Swimmer</option>
-      <option value="Climber">Climber</option>
-      <option value="Coder">Coder</option>
-      <option value="Baker">Baker</option>
-      <option value="Skater">Skater</option>
-      <option value="Runner">Runner</option>
-    </select><br>
-
-    <!-- Style -->
-    <label for="style">Choose a style:</label><br>
-    <select id="style">
-      <option value="Elegant">Elegant</option>
-      <option value="Vintage">Vintage</option>
-      <option value="Modern">Modern</option>
-      <option value="Chic">Chic</option>
-      <option value="Boho">Boho</option>
-      <option value="Minimalist">Minimalist</option>
-      <option value="Trendy">Trendy</option>
-      <option value="Casual">Casual</option>
-      <option value="Sporty">Sporty</option>
-      <option value="Classy">Classy</option>
-      <option value="Cozy">Cozy</option>
-      <option value="Artsy">Artsy</option>
-      <option value="Romantic">Romantic</option>
-      <option value="Bold">Bold</option>
-      <option value="Playful">Playful</option>
-      <option value="Street">Street</option>
-      <option value="Lux">Lux</option>
-      <option value="Girly">Girly</option>
-      <option value="Mystic">Mystic</option>
-      <option value="Gothic">Gothic</option>
-    </select><br>
-
-    <!-- Emoji -->
-    <label for="emoji">Choose an emoji:</label><br>
-    <select id="emoji">
-      <option>😊</option><option>🌸</option><option>💐</option><option>🌹</option><option>🌻</option>
-      <option>🌼</option><option>🍀</option><option>🌷</option><option>🌺</option><option>🍁</option>
-      <option>⭐</option><option>✨</option><option>💖</option><option>💎</option><option>🦋</option>
-      <option>🌙</option><option>☀️</option><option>🔥</option><option>❄️</option><option>🍓</option>
-    </select><br>
-
-    <!-- Generate button -->
-    <button onclick="generateUsername()">Generate Username</button>
-
-    <div class="results" id="results"></div>
-
-    <!-- Password step -->
-    <div id="passwordStep" style="display:none; margin-top:20px;">
-      <p>Now create a memorable password 😊<br>
-      (4–10 characters, mix of numbers & letters)</p>
-      <input type="password" id="password" placeholder="Enter password">
-      <br>
-      <button onclick="finishSignup()">Finish Sign Up</button>
-    </div>
+      <button type="submit" class="btn">Generate Username ✨</button>
+    </form>
+    <p id="usernameResult" class="fade-text"></p>
   </div>
-
-  <script>
-    let usedUsernames = [];
-
-    function generateUsername() {
-      const personality = document.getElementById("personality").value;
-      const hobby = document.getElementById("hobby").value;
-      const style = document.getElementById("style").value;
-      const emoji = document.getElementById("emoji").value;
-
-      const prefixes = ["Anonymous", "Unknown", "Incognito"];
-      const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-
-      // Generate 6 options
-      const baseOptions = [
-        `${prefix} ${personality} ${emoji}`,
-        `${prefix} ${hobby} ${emoji}`,
-        `${prefix} ${style} ${emoji}`
-      ];
-
-      // Duplicate to make 6 options
-      let options = [...baseOptions, ...baseOptions];
-
-      // Ensure uniqueness by adding numbers if repeated
-      options = options.map(option => {
-        let unique = option;
-        let count = 1;
-        while (usedUsernames.includes(unique)) {
-          count++;
-          unique = option + " " + count;
-        }
-        usedUsernames.push(unique);
-        return unique;
-      });
-
-      // Show options
-      let html = "<strong>Your username options:</strong><br>";
-      options.forEach(u => {
-        html += `<button onclick="selectUsername('${u}')">${u}</button><br>`;
-      });
-      document.getElementById("results").innerHTML = html;
-    }
-
-    function selectUsername(username) {
-      localStorage.setItem("chosenUsername", username);
-      document.getElementById("passwordStep").style.display = "block";
-    }
-
-    function finishSignup() {
-      const password = document.getElementById("password").value;
-      if (password.length < 4 || password.length > 10) {
-        alert("Password must be 4–10 characters long.");
-        return;
-      }
-      localStorage.setItem("chosenPassword", password);
-      alert("Sign up successful! 🎉 You can now log in.");
-      window.location.href = "login.html";
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

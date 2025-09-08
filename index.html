@@ -4,104 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SheHugs</title>
-
-  <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: "Playfair Display", serif;
-      height: 100vh;
+      font-family: 'Playfair Display', serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      color: #5c4742;
-      background: linear-gradient(135deg, #fce3df, #eaccc2, #d9a7a0);
-      position: relative;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0') no-repeat center/cover;
+      color: white;
     }
-
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("https://www.transparenttextures.com/patterns/arabesque.png");
-      opacity: 0.2;
-    }
-
     .container {
-      position: relative;
-      z-index: 1;
-      max-width: 600px;
+      background: rgba(0,0,0,0.6);
       padding: 40px;
-      background: rgba(255, 255, 255, 0.8);
       border-radius: 20px;
-      box-shadow: 0 12px 30px rgba(92, 71, 66, 0.25);
+      text-align: center;
     }
-
     h1 {
       font-size: 3em;
       margin-bottom: 15px;
-      color: #b57a84;
-      font-weight: 600;
-      animation: glow 3s infinite alternate;
     }
-
     p {
       font-size: 1.4em;
       margin-bottom: 35px;
-      color: #5c4742;
     }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
-
-    .btn {
-      padding: 12px 28px;
-      font-size: 1em;
-      font-weight: bold;
-      border-radius: 12px;
+    button {
+      margin: 10px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: white;
+      background: #f1c40f;
+      font-size: 18px;
+      font-family: inherit;
+      transition: 0.3s;
     }
-
-    .signup {
-      background: linear-gradient(135deg, #b57a84, #d8a39d);
-    }
-
-    .login {
-      background: linear-gradient(135deg, #5c4742, #9f8c86);
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #eaccc2, 0 0 10px #d9a7a0; }
-      to   { text-shadow: 0 0 15px #fce3df, 0 0 25px #d8a39d; }
-    }
+    button:hover { background: #d4ac0d; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Welcome to SheHugs 🤗</h1>
     <p>A safe space she shares and heals 🫶</p>
-    <div class="buttons">
-      <a href="signup.html" class="btn signup">Sign Up</a>
-      <a href="login.html" class="btn login">Log In</a>
-    </div>
+    <button onclick="window.location.href='signup.html'">Sign Up</button>
+    <button onclick="window.location.href='login.html'">Log In</button>
   </div>
 </body>
 </html>

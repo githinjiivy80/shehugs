@@ -1,179 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SheHugs - Username Generator</title>
-<link href="https://fonts.googleapis.com/css2?family=Foglighten&display=swap" rel="stylesheet" />
-<style>
-  body {
-    margin: 0;
-    font-family: 'Foglighten', serif;
-    background: url('images/flowers.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #4B2C2C;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-  }
-  .container {
-    max-width: 650px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(8px);
-    border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(75, 44, 44, 0.25);
-  }
-  h1 { font-size: 2.5em; margin-bottom: 20px; color: #b57a84; }
-  .step { margin-top: 20px; }
-  .hidden { display: none; }
-  select, button {
-    padding: 12px 20px;
-    margin: 10px 0;
-    border-radius: 12px;
-    border: none;
-    font-size: 1em;
-    font-family: 'Foglighten', serif;
-    cursor: pointer;
-  }
-  button {
-    background: linear-gradient(135deg,#b57a84,#d8a39d);
-    color: white;
-    box-shadow: 0 4px 10px rgba(181,122,132,0.4);
-    transition: all 0.3s ease;
-  }
-  button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 14px rgba(181,122,132,0.6);
-  }
-  .usernames, .emojis {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  .option {
-    background: rgba(255, 255, 255, 0.7);
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
-  }
-  .option:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.9);
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Username - SheHugs</title>
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Playfair Display", serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url("flowers.jpg") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(92, 71, 66, 0.25);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #b57a84;
+    }
+
+    .options {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .option {
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #fce3df, #eaccc2);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .option:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #d9a7a0, #fce3df);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 1em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #b57a84, #d8a39d);
+      color: white;
+    }
+
+    #finalName {
+      margin-top: 25px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #5c4742;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <h1>Generate Your Anonymous Name 🫶</h1>
+  <div class="container">
+    <h1>Select Your Anonymous Name</h1>
 
-  <div id="step1" class="step">
-    <label>Choose a base name:</label><br>
-    <select id="baseName">
-      <option value="Anonymous">Anonymous</option>
-      <option value="Incognito">Incognito</option>
-      <option value="Unknown">Unknown</option>
-    </select><br>
-    <button onclick="goToStep2()">Next</button>
+    <div class="options" id="nameOptions"></div>
+    <div class="options" id="emojiOptions"></div>
+
+    <button onclick="generateOptions()">Generate 6 New Options</button>
+    <div id="finalName"></div>
   </div>
 
-  <div id="step2" class="step hidden">
-    <h3>Select a name</h3>
-    <div class="usernames" id="usernames"></div>
-  </div>
+  <script>
+    const prefixes = ["Anonymous", "Unknown", "Incognito"];
+    const names = ["Pretty", "Brave", "Strong", "Gentle", "Kind", "Loyal", "Dreamer", "Warrior"];
+    const emojis = ["🌸", "🌼", "🌺", "🌹", "🌻", "🌷", "💫", "✨", "🦋", "🌙"];
 
-  <div id="step3" class="step hidden">
-    <h3>Select an emoji for your name</h3>
-    <div class="emojis" id="emojiOptions"></div>
-  </div>
+    let selectedName = "";
+    let selectedEmoji = "";
 
-  <div id="step4" class="step hidden">
-    <h3>Your Final Username</h3>
-    <p id="finalUsername" style="font-size:1.5em; font-weight:bold;"></p>
-    <button onclick="goToLogin()">Continue to Login</button>
-  </div>
-</div>
+    function generateOptions() {
+      const nameContainer = document.getElementById("nameOptions");
+      const emojiContainer = document.getElementById("emojiOptions");
+      nameContainer.innerHTML = "";
+      emojiContainer.innerHTML = "";
+      document.getElementById("finalName").innerText = "";
 
-<script>
-const adjectives = {pretty: ['Lovely', 'Beautiful', 'Sweet', 'Charming', 'Radiant'], strong: ['Brave', 'Bold', 'Fearless', 'Mighty', 'Heroic'], gentle: ['Soft', 'Tender', 'Calm', 'Kind', 'Graceful'], creative: ['Artful', 'Imaginative', 'Dreamy', 'Inspired', 'Visionary'], funny: ['Cheery', 'Jolly', 'Witty', 'Happy', 'Sunny']};
-const hobbies = {music: ['Melody', 'Harmony', 'Rhythm', 'Lyric', 'Chord'], reading: ['Bookworm', 'Page', 'Novel', 'Story', 'Verse'], sports: ['Runner', 'Goal', 'Champion', 'Ace', 'Player'], art: ['Painter', 'Sketch', 'Canvas', 'Color', 'Brush'], travel: ['Wanderer', 'Explorer', 'Journey', 'Path', 'Nomad']};
-const styles = {gothic: ['Shadow', 'Raven', 'Mystic', 'Night', 'Obsidian'], pastel: ['Blush', 'Cloud', 'Cotton', 'Dream', 'Petal'], boho: ['Gypsy', 'Sunbeam', 'Feather', 'Wander', 'Meadow'], sporty: ['Sprint', 'Dash', 'Kick', 'Flex', 'Score'], elegant: ['Silk', 'Velvet', 'Pearl', 'Grace', 'Lace']};
-const emojis = ['🌸', '🫶', '😇', '🎵', '📚', '⚽', '🎨', '✈️', '🖤', '🌷', '🌻', '🏅', '💎'];
-let selectedBase = '', selectedName = '', selectedEmoji = '';
-let usedEmojis = new Set();
+      // Generate 6 name options
+      for (let i = 0; i < 6; i++) {
+        const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+        const name = names[Math.floor(Math.random() * names.length)];
+        const option = document.createElement("div");
+        option.classList.add("option");
+        option.innerText = `${prefix} ${name}`;
+        option.onclick = () => {
+          selectedName = `${prefix} ${name}`;
+          showFinal();
+        };
+        nameContainer.appendChild(option);
+      }
 
-function getRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function generateCategoryNames(obj, count = 2) {
-  let names = [], keys = Object.keys(obj);
-  while (names.length < count * keys.length) {
-    const cat = getRandom(keys);
-    const name = getRandom(obj[cat]);
-    if (!names.includes(name)) names.push(name);
-  }
-  return names.slice(0, 6);
-}
-
-function goToStep2() {
-  selectedBase = document.getElementById('baseName').value;
-  document.getElementById('step1').classList.add('hidden');
-  document.getElementById('step2').classList.remove('hidden');
-
-  const usernamesDiv = document.getElementById('usernames');
-  usernamesDiv.innerHTML = '';
-  const names = generateCategoryNames({...adjectives, ...hobbies, ...styles});
-
-  names.forEach(name => {
-    const div = document.createElement('div');
-    div.textContent = name;
-    div.className = 'option';
-    div.onclick = () => {
-      selectedName = name;
-      goToStep3();
-    };
-    usernamesDiv.appendChild(div);
-  });
-}
-
-function goToStep3() {
-  document.getElementById('step2').classList.add('hidden');
-  document.getElementById('step3').classList.remove('hidden');
-  const emojiDiv = document.getElementById('emojiOptions');
-  emojiDiv.innerHTML = '';
-  emojis.forEach(emoji => {
-    if (!usedEmojis.has(emoji)) {
-      const div = document.createElement('div');
-      div.textContent = emoji;
-      div.className = 'option';
-      div.onclick = () => {
-        selectedEmoji = emoji;
-        usedEmojis.add(emoji);
-        showFinalUsername();
-      };
-      emojiDiv.appendChild(div);
+      // Generate 6 emoji options
+      for (let i = 0; i < 6; i++) {
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        const option = document.createElement("div");
+        option.classList.add("option");
+        option.innerText = emoji;
+        option.onclick = () => {
+          selectedEmoji = emoji;
+          showFinal();
+        };
+        emojiContainer.appendChild(option);
+      }
     }
-  });
-}
 
-function showFinalUsername() {
-  document.getElementById('step3').classList.add('hidden');
-  document.getElementById('step4').classList.remove('hidden');
-  const final = `${selectedBase} ${selectedName} ${selectedEmoji}`;
-  document.getElementById('finalUsername').textContent = final;
-  localStorage.setItem('selectedUsername', final);
-}
+    function showFinal() {
+      if (selectedName && selectedEmoji) {
+        document.getElementById("finalName").innerText =
+          `Your username: ${selectedName} ${selectedEmoji}`;
+      }
+    }
 
-function goToLogin() {
-  window.location.href = 'login.html';
-}
-</script>
+    // Load options at start
+    generateOptions();
+  </script>
 </body>
 </html>

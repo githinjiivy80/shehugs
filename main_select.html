@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SheHugs — Find a Match</title>
+
+  <style>
+    /* Minimal, elegant SheHugs styling inspired by your palette */
+    :root{
+      --ivory:#F6F2ED;
+      --champagne:#EAD2C0;
+      --mauve:#B57A84;
+      --rose:#D8A39D;
+      --taupe:#9F8C86;
+      --leather:#5C4742;
+      --glass: rgba(255,255,255,0.85);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Playfair Display", serif;
+      background: linear-gradient(135deg,#fce3df,#eaccc2,#d9a7a0);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:var(--leather);
+    }
+
+    .card{
+      width:100%;
+      max-width:920px;
+      background:var(--glass);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 12px 30px rgba(92,71,66,0.18);
+    }
+
+    h1{margin:0 0 6px; color:var(--mauve); font-size:2.2rem}
+    p.motto{margin:0 0 18px; color:var(--taupe); font-size:1.05rem}
+
+    .row{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:16px}
+    .col{
+      flex:1 1 220px;
+      min-width:220px;
+    }
+
+    label{display:block; font-weight:600; margin-bottom:8px}
+    select, .checkbox-list{
+      width:100%;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(92,71,66,0.12);
+      background: white;
+      font-size:0.95rem;
+    }
+
+    .muted{color:var(--taupe); font-size:0.9rem; margin-top:6px}
+
+    .checkbox-list{max-height:220px; overflow:auto; padding:10px}
+    .checkbox-list label{display:block; padding:6px 4px; cursor:pointer; border-radius:8px}
+    .checkbox-list input{margin-right:8px}
+
+    .actions{display:flex; gap:12px; margin-top:12px; align-items:center}
+    .btn{
+      padding:10px 18px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn-primary{background:linear-gradient(135deg,var(--mauve),var(--rose)); color:white}
+    .btn-ghost{background:transparent; border:1px solid rgba(92,71,66,0.08)}
+
+    #status{margin-top:12px; color:var(--leather); font-weight:600}
+
+    .results{margin-top:20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+    .match{
+      padding:12px; border-radius:10px; background:linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6));
+      border:1px solid rgba(92,71,66,0.06);
+    }
+    .match h3{margin:0; font-size:1rem; color:var(--mauve)}
+    .match p{margin:6px 0 0; color:var(--taupe); font-size:0.95rem}
+
+    .small{font-size:0.85rem; color:var(--taupe)}
+
+    .note{margin-top:12px; font-size:0.9rem; color:var(--taupe)}
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <h1>Find a Match — SheHugs 🤗</h1>
+    <p class="motto">A safe space she shares, is understood and heals 🫶</p>
+
+    <div class="row">
+      <div class="col">
+        <label for="age">Your age group</label>
+        <select id="age">
+          <option value="">-- Select age --</option>
+          <option>13-17</option>
+          <option>18-24</option>
+          <option>25-34</option>
+          <option>35-44</option>
+          <option>45-54</option>
+          <option>55+</option>
+          <option>Prefer not to say</option>
+        </select>
+        <div class="muted small">We keep your identity private. Age helps us match better.</div>
+      </div>
+
+      <div class="col">
+        <label>Experience categories (pick 1 or more)</label>
+        <div class="checkbox-list" id="categories">
+          <!-- categories inserted by JS -->
+        </div>
+        <div class="muted small">Pick the main issues you want support for.</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="findBtn">Find Match</button>
+      <button class="btn btn-ghost" id="clearBtn">Clear</button>
+      <div id="status" aria-live="polite"></div>
+    </div>
+
+    <div id="results" class="results" aria-live="polite"></div>
+    <div class="note">Note: Matches are anonymous. If you are in immediate danger, contact local emergency services or support hotlines.</div>
+  </div>
+
+  <script>
+    /***********************
+     * Prototype matching logic (localStorage-based)
+     * - Not a final backend. This simulates user matchmaking in the browser.
+     * - Later we will replace storage with secure server endpoints.
+     ***********************/
+
+    // Full category list (same groups as the plan)
+    const CATEGORY_LIST = [
+      "Pregnancy crisis","Unplanned pregnancy","Teen pregnancy","Single motherhood",
+      "Miscarriage","Stillbirth / Infant loss","Adoption experiences","Fertility issues",
+      "Postpartum depression","Abortion","Pregnancy loss","Bad marriage / divorce",
+      "Domestic violence","Emotional abuse / manipulation","Financial abuse",
+      "Infidelity / betrayal","Child custody / parenting conflict","Sexual assault / rape",
+      "Sexual abuse (historical)","Physical abuse / assault","Depression / anxiety",
+      "Self-harm ideation","Addiction / substance abuse","Eating disorder",
+      "Grief / bereavement","Teenage trauma","Career / financial hardship",
+      "Homelessness / housing crisis","LGBTQ+ experiences","Religious/faith crisis",
+      "Other / prefer to describe"
+    ];
+
+    // build the category checkboxes
+    const categoriesDiv = document.getElementById('categories');
+    CATEGORY_LIST.forEach(cat => {
+      const id = 'c_' + cat.replace(/[^a-z0-9]/gi,'_');
+      categoriesDiv.insertAdjacentHTML('beforeend', `
+        <label for="${id}"><input type="checkbox" id="${id}" value="${cat}"> ${cat}</label>
+      `);
+    });
+
+    // Utility: generate system anonymous name (Anonymous1, Anonymous2, ...)
+    function nextAnonymousName() {
+      let n = Number(localStorage.getItem('shehugs_name_count') || 0) + 1;
+      localStorage.setItem('shehugs_name_count', String(n));
+      return `Anonymous${n}`;
+    }
+
+    // Helper to get selected categories array
+    function getSelectedCategories() {
+      const checked = Array.from(categoriesDiv.querySelectorAll('input:checked'));
+      return checked.map(ch => ch.value);
+    }
+
+    // Helper: store waiting users in localStorage under key 'shehugs_waiting'
+    function getWaitingPool() {
+      try {
+        return JSON.parse(localStorage.getItem('shehugs_waiting') || '[]');
+      } catch(e) {
+        return [];
+      }
+    }
+    function setWaitingPool(pool) {
+      localStorage.setItem('shehugs_waiting', JSON.stringify(pool));
+    }
+
+    // Matching algorithm: find a waiting user who shares at least one category and (optionally) age group
+    function findMatchFor(user) {
+      const pool = getWaitingPool();
+      for (let i = 0; i < pool.length; i++) {
+        const other = pool[i];
+        // Must not match with self (we use id)
+        if (other.id === user.id) continue;
+        // require at least one overlapping category
+        const overlap = other.categories.some(c => user.categories.includes(c));
+        const ageMatch = (other.age === user.age) || user.age === "Prefer not to say" || other.age === "Prefer not to say";
+        if (overlap && ageMatch) {
+          // remove matched user from pool
+          pool.splice(i,1);
+          setWaitingPool(pool);
+          return other;
+        }
+      }
+      return null;
+    }
+
+    // UI references
+    const findBtn = document.getElementById('findBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const status = document.getElementById('status');
+    const resultsDiv = document.getElementById('results');
+
+    findBtn.addEventListener('click', () => {
+      status.textContent = '';
+      resultsDiv.innerHTML = '';
+
+      const age = document.getElementById('age').value;
+      const cats = getSelectedCategories();
+      if (!age || cats.length === 0) {
+        status.textContent = '⚠️ Please choose an age group and at least one category.';
+        return;
+      }
+
+      // create a local user object (id ensures uniqueness)
+      const user = {
+        id: 'u_' + Date.now() + '_' + Math.floor(Math.random()*9999),
+        anonName: nextAnonymousName(),
+        age: age,
+        categories: cats,
+        ts: Date.now()
+      };
+
+      status.textContent = '🔎 Searching for a match...';
+      // small delay to simulate network
+      setTimeout(() => {
+        const match = findMatchFor(user);
+        if (match) {
+          // immediate success — show both anonymous tags and categories matched
+          status.textContent = '💬 Match found!';
+          showMatchCard(match, user);
+        } else {
+          // put the user in waiting pool
+          const pool = getWaitingPool();
+          pool.push(user);
+          setWaitingPool(pool);
+          status.textContent = '⏳ You have been added to the waiting pool. We will notify you when a match joins.';
+          showWaitingCard(user);
+        }
+      }, 700);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      document.getElementById('age').value = '';
+      Array.from(categoriesDiv.querySelectorAll('input')).forEach(i => i.checked = false);
+      status.textContent = '';
+      resultsDiv.innerHTML = '';
+    });
+
+    // show matched card UI
+    function showMatchCard(found, requester) {
+      resultsDiv.innerHTML = '';
+
+      // matched person card
+      const el1 = document.createElement('div');
+      el1.className = 'match';
+      el1.innerHTML = `<h3>${found.anonName}</h3>
+        <p class="small">Shared topics: ${found.categories.filter(c => requester.categories.includes(c)).slice(0,4).join(', ')}</p>
+        <p class="small">Age group: ${found.age}</p>
+        <p class="small">Chat: <strong>Anonymous</strong> — starts now</p>`;
+      resultsDiv.appendChild(el1);
+
+      // your own card (as shown to user)
+      const el2 = document.createElement('div');
+      el2.className = 'match';
+      el2.innerHTML = `<h3>${requester.anonName} (you)</h3>
+        <p class="small">Selected: ${requester.categories.slice(0,4).join(', ')}</p>
+        <p class="small">Age group: ${requester.age}</p>
+        <p class="small">Next: open anonymous chat (demo)</p>`;
+      resultsDiv.appendChild(el2);
+
+      // For prototype: store pair in localStorage (a simple conversation channel id)
+      const channelId = 'ch_' + Date.now() + '_' + Math.floor(Math.random()*9999);
+      const chats = JSON.parse(localStorage.getItem('shehugs_chats') || '[]');
+      chats.push({channelId, a: found.anonName, b: requester.anonName, created: Date.now()});
+      localStorage.setItem('shehugs_chats', JSON.stringify(chats));
+
+      // show a "Start Chat" button that opens a demo chat page (we'll supply later)
+      const btnStart = document.createElement('button');
+      btnStart.className = 'btn btn-primary';
+      btnStart.textContent = 'Start Anonymous Chat (demo)';
+      btnStart.onclick = () => {
+        // save channel and user to localStorage and open chat page (e.g., chat.html)
+        localStorage.setItem('shehugs_current_channel', channelId);
+        localStorage.setItem('shehugs_current_user', JSON.stringify(requester));
+        window.location.href = 'chat_demo.html';
+      };
+      resultsDiv.appendChild(btnStart);
+    }
+
+    function showWaitingCard(user) {
+      resultsDiv.innerHTML = '';
+      const el = document.createElement('div');
+      el.className = 'match';
+      el.innerHTML = `<h3>${user.anonName}</h3>
+        <p class="small">Waiting for a match…</p>
+        <p class="small">Selected: ${user.categories.slice(0,4).join(', ')}</p>
+        <p class="small">Age group: ${user.age}</p>`;
+      resultsDiv.appendChild(el);
+    }
+
+    /***** Notes for next steps (backend version)
+     * - Later we will replace localStorage with server-side endpoints:
+     *   POST /api/waiting  (add user to waiting pool)
+     *   GET  /api/match/:id (check for match)
+     *   POST /api/chat/create (create chat channel)
+     * - Server will persist waiting pool and perform matching more robustly.
+     *****/
+
+  </script>
+</body>
+</html>

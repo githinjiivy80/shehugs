@@ -1,5 +1,8 @@
 // Store taken usernames so we can block duplicates
 let takenUsernames = new Set();
+let allUsernames = [];
+let currentLotIndex = 0;
+const LOT_SIZE = 7; // how many usernames to show per lot
 
 function generateUsername() {
     const hobby = document.getElementById("hobby").value;
@@ -8,35 +11,47 @@ function generateUsername() {
     const emoji = document.getElementById("emoji").value;
 
     const display = document.getElementById("usernameDisplay");
-    display.innerHTML = ""; // Clear previous results
 
-    if (!hobby || !personality || !style || !emoji) {
-        display.innerHTML = "⚠️ Please select one from each section before generating!";
-        return;
+    // If first generation or options changed, regenerate all usernames
+    if (!allUsernames.length || display.innerHTML === "⚠️ Please select one from each section before generating!") {
+        if (!hobby || !personality || !style || !emoji) {
+            display.innerHTML = "⚠️ Please select one from each section before generating!";
+            return;
+        }
+
+        const prefixes = ["Anonymous", "Unknown", "Incognito"];
+        const traits = [hobby, personality, style];
+        let usernames = new Set();
+
+        // Generate combinations
+        prefixes.forEach(prefix => {
+            // One-trait combos
+            traits.forEach(t1 => usernames.add(`${prefix} ${t1} ${emoji}`));
+
+            // Two-trait combos
+            for (let i = 0; i < traits.length; i++) {
+                for (let j = i + 1; j < traits.length; j++) {
+                    usernames.add(`${prefix} ${traits[i]} ${traits[j]} ${emoji}`);
+                }
+            }
+
+            // Three-trait combo
+            usernames.add(`${prefix} ${traits[0]} ${traits[1]} ${traits[2]} ${emoji}`);
+        });
+
+        // Convert Set to Array and shuffle for randomness
+        allUsernames = Array.from(usernames).sort(() => Math.random() - 0.5);
+        currentLotIndex = 0; // start from first lot
     }
 
-    // Prefixes and reader variations
-    const prefixes = ["Anonymous", "Unknown", "Incognito"];
-    const readerAddons = ["Reader", "Soul", "Heart"];
+    // Calculate which usernames to show
+    const start = currentLotIndex * LOT_SIZE;
+    const end = start + LOT_SIZE;
+    const lot = allUsernames.slice(start, end);
 
-    // Generate 8–10 creative options
-    let usernames = [];
-
-    prefixes.forEach(prefix => {
-        usernames.push(`${prefix} ${personality} ${emoji}`);
-        usernames.push(`${prefix} ${hobby} ${style} ${emoji}`);
-        usernames.push(`${prefix} ${personality} ${readerAddons[Math.floor(Math.random() * readerAddons.length)]} ${emoji}`);
-    });
-
-    // Add a few purely creative mixes
-    usernames.push(`Gentle ${personality} ${readerAddons[Math.floor(Math.random() * readerAddons.length)]} ${emoji}`);
-    usernames.push(`${prefixes[Math.floor(Math.random() * prefixes.length)]} ${style} ${readerAddons[Math.floor(Math.random() * readerAddons.length)]} ${emoji}`);
-
-    // Remove duplicates
-    usernames = [...new Set(usernames)].slice(0, 10);
-
-    // Show results
-    usernames.forEach(name => {
+    // Clear display and show usernames
+    display.innerHTML = "";
+    lot.forEach(name => {
         if (takenUsernames.has(name)) {
             let p = document.createElement("p");
             p.textContent = `${name} ❌ (Not available)`;
@@ -53,4 +68,7 @@ function generateUsername() {
             display.appendChild(btn);
         }
     });
+
+    // Move to next lot (loop back to first after the third)
+    currentLotIndex = (currentLotIndex + 1) % Math.ceil(allUsernames.length / LOT_SIZE);
 }
